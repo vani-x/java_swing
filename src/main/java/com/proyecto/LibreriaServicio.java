@@ -279,8 +279,8 @@ public class LibreriaServicio {
         lista.adiFinal("Calculus", "James Stewart", 1392, "Nuevo", 600);
 
         // === Creación de Libreria ===
-        libreria = new Libreria("Libreria de Informatica UMSA", "Av. 6 de Agosto esq. Campos", mp1, lista);
-
+        this.libreria = new Libreria("Libreria de Informatica UMSA", "Av. 6 de Agosto esq. Campos", mp1, lista);
+        
         System.out.println("Libreria creada exitosamente");
 
         // System.out.println("===============================================");
@@ -313,6 +313,7 @@ public class LibreriaServicio {
         // System.out.println("===============================================");
         // mostrarClientesQueComparonFechaX(mp1, "2025-10-29");
     }
+    
 // hay que cambiar todas los resultados lo que devuelve
     public static void generarHistorialTransacciones(Libreria A) {
         Mp_ColaCircularFactura mc = A.getF();
@@ -320,11 +321,14 @@ public class LibreriaServicio {
         mc.mostrar();
     }
 
-    public static void buscarLibroPorAutor(ListaDobleCircularLibro lista, String autorBuscado) {
+    public String buscarLibroPorAutor(ListaDobleCircularLibro lista, String autorBuscado) {
+        
         if (lista.esVacia()) {
             System.out.println("No hay libros registrados en la librería.");
-            return;
+            return "";
+            //break
         }
+
 
         NodoLibro r = lista.getP();
         boolean encontrado = false;
@@ -338,10 +342,12 @@ public class LibreriaServicio {
         } while (r != lista.getP());
 
         if (!encontrado)
-            System.out.println("No se encontraron libros del autor: " + autorBuscado);
+            return ("No se encontraron libros del autor: " + autorBuscado);
+
+        return "";
     }
 
-    public static void mostrarFacturasDeCliente(Mp_ColaCircularFactura mc, int ciCliente) {
+    public  String mostrarFacturasDeCliente(Mp_ColaCircularFactura mc, int ciCliente) {
         for (int i = 0; i < mc.getN(); i++) {
             ColaCircularFactura cola = new ColaCircularFactura();
             Factura f;
@@ -349,14 +355,15 @@ public class LibreriaServicio {
             while (!mc.esVacia(i)) {
                 f = mc.eliminar(i);
                 if (f.getP().getCi() == ciCliente)
-                    System.out.println("🧾 " + f);
+                    return("🧾 " + f);
                 cola.adi(f);
             }
             mc.vaciar(i, cola); // restaurar contenido original
         }
+        return("No se encontraron facturas para el cliente con CI: " + ciCliente);
     }
 
-    public static double calcularTotalVentas(Mp_ColaCircularFactura mc) {
+    public  double calcularTotalVentas(Mp_ColaCircularFactura mc) {
         double total = 0;
         for (int i = 0; i < mc.getN(); i++) {
             ColaCircularFactura aux = new ColaCircularFactura();
@@ -371,7 +378,7 @@ public class LibreriaServicio {
         return total;
     }
 
-    public static void mostrarClientesQueComparonFechaX(Mp_ColaCircularFactura mc, String fecha) {
+    public  String mostrarClientesQueComparonFechaX(Mp_ColaCircularFactura mc, String fecha) {
         System.out.println("Fecha:" + fecha);
         for (int i = 0; i < mc.getN(); i++) {
             ColaCircularFactura aux = new ColaCircularFactura();
@@ -379,12 +386,22 @@ public class LibreriaServicio {
             while (!mc.esVacia(i)) {
                 f = mc.eliminar(i);
                 if (f.getFecha().equals(fecha)) {
-                    f.getP().mostrar();
+                    return("🧾 " + f.getP());
+                    // f.getP().mostrar();
                 }
                 aux.adi(f);
             }
             mc.vaciar(i, aux);
         }
+        return "";
+
     }
 
+    public Libreria getLibreria() {
+        return libreria;
+    }
+
+    public void setLibreria(Libreria libreria) {
+        this.libreria = libreria;
+    }
 }
