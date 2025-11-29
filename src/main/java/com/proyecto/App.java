@@ -13,7 +13,8 @@ public class App
     {
         SwingUtilities.invokeLater(() -> {
             LibreriaServicio lib = new LibreriaServicio();
-            new modoGrafico(lib).setVisible(true);
+            //new modoGrafico(lib).setVisible(true);
+            new modoGrafico().createAndShowGUI();
         });
     }
 }
