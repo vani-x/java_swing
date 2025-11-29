@@ -16,5 +16,7 @@ public class App
             //new modoGrafico(lib).setVisible(true);
             new modoGrafico().createAndShowGUI();
         });
+
+        
     }
 }
