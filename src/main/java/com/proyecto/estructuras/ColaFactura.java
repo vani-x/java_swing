@@ -1,6 +1,8 @@
 package com.proyecto.estructuras;
+import java.io.Serializable;
+
 import com.proyecto.modelos.*;
-public class ColaFactura extends vectorFactura{
+public class ColaFactura extends vectorFactura  implements Serializable{
 	protected int fr;
 	protected int fi;
 	

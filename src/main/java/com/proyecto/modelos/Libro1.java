@@ -1,7 +1,9 @@
 package com.proyecto.modelos;
 import com.proyecto.estructuras.*;
+
+import java.io.Serializable;
 import java.util.Scanner;
-public class Libro1 {
+public class Libro1 implements Serializable {
 	private String nombre;
 	private String autor;
 	private int paginas;

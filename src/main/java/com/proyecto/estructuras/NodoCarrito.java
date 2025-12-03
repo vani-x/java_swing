@@ -1,7 +1,9 @@
 package com.proyecto.estructuras;
+import java.io.Serializable;
+
 import com.proyecto.modelos.*;
 
-public class NodoCarrito {
+public class NodoCarrito  implements Serializable{
 
     private Libro1 libro;
 

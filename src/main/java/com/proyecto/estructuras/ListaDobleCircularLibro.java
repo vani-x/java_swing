@@ -1,8 +1,10 @@
 package com.proyecto.estructuras;
 import com.proyecto.modelos.*;
+
+import java.io.Serializable;
 import java.util.Scanner;
 
-public class ListaDobleCircularLibro extends ListaDobleLibro{
+public class ListaDobleCircularLibro extends ListaDobleLibro  implements Serializable{
 	public ListaDobleCircularLibro() {
 		super();
 	}

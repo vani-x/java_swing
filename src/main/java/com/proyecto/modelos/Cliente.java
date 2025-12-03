@@ -1,6 +1,7 @@
 package com.proyecto.modelos;
+import java.io.Serializable;
 import java.util.Scanner;
-public class Cliente extends Persona{
+public class Cliente extends Persona  implements Serializable{
 	private String correo;
 	private String direccion;
 	public Cliente(String nombre, int ci, int telefono, String genero, String correo, String direccion) {

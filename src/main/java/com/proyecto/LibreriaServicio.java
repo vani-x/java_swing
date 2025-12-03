@@ -1,4 +1,13 @@
 package com.proyecto;
+import java.awt.List;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+
 import com.proyecto.estructuras.*;
 import com.proyecto.modelos.*;
 
@@ -7,15 +16,52 @@ import com.proyecto.estructuras.LDCarrito;
 import com.proyecto.estructuras.ListaDobleCircularLibro;
 import com.proyecto.estructuras.Mp_ColaCircularFactura;
 import com.proyecto.estructuras.NodoLibro;
-import com.proyecto.modelos.Cliente;
-import com.proyecto.modelos.Factura;
-import com.proyecto.modelos.Libro1;
-import com.proyecto.modelos.Vendedor;
 
 public class LibreriaServicio {
     private Libreria libreria;
-    
+    private final String RUTA_ARCHIVO = "datos_libreria.dat"; // persistencia 
+
     public LibreriaServicio() {
+        // cargamos los datos guardados (si existen)
+        this.libreria = cargarDatos();
+
+        if (this.libreria == null) {
+            System.out.println("No hay datos guardados. Inicializando datos por defecto...");
+            inicializarDatosPorDefecto();
+        } else {
+            System.out.println("Datos cargados correctamente del disco.");
+        }
+    }
+
+    // guardar cambios
+    public void guardarCambios() {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(RUTA_ARCHIVO))) {
+            oos.writeObject(this.libreria);
+            System.out.println("Librería guardada.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // cargar datos
+    private Libreria cargarDatos() {
+        File archivo = new File(RUTA_ARCHIVO);
+        if (!archivo.exists()) {
+            return null; 
+            // si no hay datos guardados retornamos null
+        }
+
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(archivo))) {
+            return (Libreria) ois.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+    private void inicializarDatosPorDefecto() {
+
+    
         // === Clientes (Sin acentos) ===
         Cliente c1 = new Cliente("Carlos Perez", 1234567, 76543210, "Masculino", "carlos.perez@gmail.com",
                 "Av. Bolivar Nro 123");
@@ -282,7 +328,7 @@ public class LibreriaServicio {
         this.libreria = new Libreria("Libreria de Informatica UMSA", "Av. 6 de Agosto esq. Campos", mp1, lista);
         
         System.out.println("Libreria creada exitosamente");
-
+        guardarCambios();
         // System.out.println("===============================================");
         // System.out.println("------------------Problema 1-------------------");
         // System.out.println("===============================================");
@@ -378,7 +424,8 @@ public class LibreriaServicio {
         return total;
     }
 
-    public  String mostrarClientesQueComparonFechaX(Mp_ColaCircularFactura mc, String fecha) {
+    public ArrayList<Cliente> mostrarClientesQueComparonFechaX(Mp_ColaCircularFactura mc, String fecha) {
+        ArrayList<Cliente> clientes = new ArrayList<>();
         System.out.println("Fecha:" + fecha);
         for (int i = 0; i < mc.getN(); i++) {
             ColaCircularFactura aux = new ColaCircularFactura();
@@ -386,14 +433,15 @@ public class LibreriaServicio {
             while (!mc.esVacia(i)) {
                 f = mc.eliminar(i);
                 if (f.getFecha().equals(fecha)) {
-                    return("🧾 " + f.getP());
+                    //return("🧾 " + f.getP());
+                    clientes.add((f.getP()));
                     // f.getP().mostrar();
                 }
                 aux.adi(f);
             }
             mc.vaciar(i, aux);
         }
-        return "";
+        return clientes;
 
     }
 

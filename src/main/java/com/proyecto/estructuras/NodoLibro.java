@@ -1,7 +1,9 @@
 package com.proyecto.estructuras;
+import java.io.Serializable;
+
 import com.proyecto.modelos.*;
 
-public class NodoLibro {
+public class NodoLibro  implements Serializable{
 	
 	private Libro1 dato;
 	private NodoLibro sig; //definiendo el campo enlace sig

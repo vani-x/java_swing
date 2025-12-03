@@ -1,8 +1,10 @@
 package com.proyecto.estructuras;
 import com.proyecto.modelos.*;
+
+import java.io.Serializable;
 import java.util.Scanner;
 
-public class LDCarrito {
+public class LDCarrito  implements Serializable{
 	private NodoCarrito p;
 
 	public LDCarrito() {

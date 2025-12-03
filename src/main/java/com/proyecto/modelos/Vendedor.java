@@ -1,7 +1,9 @@
 package com.proyecto.modelos;
 import com.proyecto.estructuras.*;
+
+import java.io.Serializable;
 import java.util.Scanner;
-public class Vendedor extends Persona {
+public class Vendedor extends Persona  implements Serializable{
 	private double salario;
 	private String rol;
 	public Vendedor(String nombre, int ci, int telefono, String genero, double salario, String rol) {

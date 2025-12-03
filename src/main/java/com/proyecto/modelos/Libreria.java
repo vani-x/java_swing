@@ -1,6 +1,8 @@
 package com.proyecto.modelos;
+import java.io.Serializable;
+
 import com.proyecto.estructuras.*;
-public class Libreria {
+public class Libreria  implements Serializable{
 	private String nombre;
 	private String direccion;
 	private Mp_ColaCircularFactura F;

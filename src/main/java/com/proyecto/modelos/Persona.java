@@ -1,7 +1,9 @@
 package com.proyecto.modelos;
 import com.proyecto.estructuras.*;
+
+import java.io.Serializable;
 import java.util.Scanner;
-public class Persona {
+public class Persona  implements Serializable{
 	protected String nombre;
 	protected int ci;
 	protected int telefono;

@@ -1,6 +1,8 @@
 package com.proyecto.estructuras;
+import java.io.Serializable;
+
 import com.proyecto.modelos.*;
-public class ListaDobleLibro {
+public class ListaDobleLibro  implements Serializable{
 	protected NodoLibro P;
 	
 	ListaDobleLibro(){

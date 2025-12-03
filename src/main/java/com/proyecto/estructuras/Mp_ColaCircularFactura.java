@@ -1,7 +1,9 @@
 package com.proyecto.estructuras;
 import com.proyecto.modelos.*;
+
+import java.io.Serializable;
 import java.util.Scanner;
-public class Mp_ColaCircularFactura {
+public class Mp_ColaCircularFactura  implements Serializable{
 	private ColaCircularFactura[] c=new ColaCircularFactura[100];
     private int n; // número de colas
 

@@ -1,8 +1,9 @@
 package com.proyecto.estructuras;
+import java.io.Serializable;
 import java.util.Scanner;
 import com.proyecto.modelos.*;
 
-public class ColaCircularFactura extends ColaFactura{
+public class ColaCircularFactura extends ColaFactura implements Serializable{
 	public ColaCircularFactura() {
 		super();
 	}

@@ -1,7 +1,9 @@
 package com.proyecto.modelos;
 import com.proyecto.estructuras.*;
+
+import java.io.Serializable;
 import java.util.Scanner;
-public class Factura {
+public class Factura  implements Serializable{
 	private String fecha;
 	private double total;
 	private double descuento;
